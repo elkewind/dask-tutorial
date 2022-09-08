@@ -22,29 +22,41 @@ print(type(ddf))
 
 
 # %%
-birds_pandasx2 = pd.concat([birds_pandas, birds_pandas])
 
-birds_pandasx4 = pd.concat([birds_pandasx2, birds_pandasx2])
+birds_pandasx2 = dd.multi.concat([birds_pandas, birds_pandas])
 
-birds_pandasx8 = pd.concat([birds_pandasx4, birds_pandasx4])
+birds_pandasx4 = dd.multi.concat([birds_pandasx2, birds_pandasx2])
 
-birds_pandasx16 = pd.concat([birds_pandasx8, birds_pandasx8])
+birds_pandasx8 = dd.multi.concat([birds_pandasx4, birds_pandasx4])
 
-birds_pandasx32 = pd.concat([birds_pandasx16, birds_pandasx16])
+birds_pandasx16 = dd.multi.concat([birds_pandasx8, birds_pandasx8])
 
-birds_pandasx64 = pd.concat([birds_pandasx32, birds_pandasx32])
+birds_pandasx32 = dd.multi.concat([birds_pandasx16, birds_pandasx16])
 
-birds_pandasx128 = pd.concat([birds_pandasx64, birds_pandasx64])
+birds_pandasx64 = dd.multi.concat([birds_pandasx32, birds_pandasx32])
 
-birds_pandasx256 = pd.concat([birds_pandasx128, birds_pandasx128])
+birds_pandasx128 = dd.multi.concat([birds_pandasx64, birds_pandasx64])
 
-birds_pandasx512 = pd.concat([birds_pandasx256, birds_pandasx256])
+birds_pandasx256 = dd.multi.concat([birds_pandasx128, birds_pandasx128])
 
-birds_pandasx1024 = pd.concat([birds_pandasx512, birds_pandasx512])
+birds_pandasx512 = dd.multi.concat([birds_pandasx256, birds_pandasx256])
 
-birds_pandasx2048 = pd.concat([birds_pandasx1024, birds_pandasx1024])
+birds_pandasx1024 = dd.multi.concat([birds_pandasx512, birds_pandasx512])
 
-birds_pandasx4096 = pd.concat([birds_pandasx2048, birds_pandasx2048])
+birds_pandasx2048 = dd.multi.concat([birds_pandasx1024, birds_pandasx1024])
 
-print(birds_pandasx4096.head)
+#birds_pandasx4096 = dd.multi.concat([birds_pandasx2048, birds_pandasx2048])
+
+print(birds_pandasx2048.head)
+
+# %%
+
+birds_pandasx2048['distancex100'] = birds_pandasx2048['distance']*100
+
+# %%
+
+#birds_daskx2048 = dd.from_pandas(birds_pandasx2048, npartitions=2048)
+
+birds_pandasx2048['distancex100'] = birds_pandasx2048['distance']*100
+
 # %%
