@@ -1,8 +1,8 @@
 # Pandas Workspace
 
 # %%
-from timeit import timeit
 import pandas as pd
+import time
 
 # Create an object that is a link to data
 birds_link = 'https://portal.edirepository.org/nis/dataviewer?packageid=knb-lter-cap.256.10&entityid=53edaa7a0e083013d9bf20322db1780e'

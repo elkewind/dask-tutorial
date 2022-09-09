@@ -1,7 +1,6 @@
 # Dask Workspace
 
 # %%
-from timeit import timeit
 import dask.dataframe as dd
 import time
 
@@ -14,10 +13,7 @@ birds_dask = dd.read_csv(birds_link)
 # Compare your pandas data frame with your dask data frame
 print(type(birds_dask))
 
-
 # %%
-
-#%%timeit
 start_time = time.time()
 
 birds_daskx2 = dd.multi.concat([birds_dask, birds_dask])
