@@ -1,62 +1,53 @@
 # Dask Workspace
 
 # %%
-import pandas as pd
+from timeit import timeit
 import dask.dataframe as dd
+import time
 
 # Create an object that is a link to data
 birds_link = 'https://portal.edirepository.org/nis/dataviewer?packageid=knb-lter-cap.256.10&entityid=53edaa7a0e083013d9bf20322db1780e'
 
 # Create the same data frame using pandas
-birds_pandas = pd.read_csv(birds_link)
+birds_dask = dd.read_csv(birds_link)
 
 # Compare your pandas data frame with your dask data frame
-print(type(birds_pandas))
-
-ddf = dd.from_pandas(birds_pandas, npartitions=5)
-print(type(ddf))
-
-#print(birds_pandas.head)
-
-
+print(type(birds_dask))
 
 
 # %%
 
-birds_pandasx2 = dd.multi.concat([birds_pandas, birds_pandas])
+#%%timeit
+start_time = time.time()
 
-birds_pandasx4 = dd.multi.concat([birds_pandasx2, birds_pandasx2])
+birds_daskx2 = dd.multi.concat([birds_dask, birds_dask])
 
-birds_pandasx8 = dd.multi.concat([birds_pandasx4, birds_pandasx4])
+birds_daskx4 = dd.multi.concat([birds_daskx2, birds_daskx2])
 
-birds_pandasx16 = dd.multi.concat([birds_pandasx8, birds_pandasx8])
+birds_daskx8 = dd.multi.concat([birds_daskx4, birds_daskx4])
 
-birds_pandasx32 = dd.multi.concat([birds_pandasx16, birds_pandasx16])
+birds_daskx16 = dd.multi.concat([birds_daskx8, birds_daskx8])
 
-birds_pandasx64 = dd.multi.concat([birds_pandasx32, birds_pandasx32])
+birds_daskx32 = dd.multi.concat([birds_daskx16, birds_daskx16])
 
-birds_pandasx128 = dd.multi.concat([birds_pandasx64, birds_pandasx64])
+birds_daskx64 = dd.multi.concat([birds_daskx32, birds_daskx32])
 
-birds_pandasx256 = dd.multi.concat([birds_pandasx128, birds_pandasx128])
+birds_daskx128 = dd.multi.concat([birds_daskx64, birds_daskx64])
 
-birds_pandasx512 = dd.multi.concat([birds_pandasx256, birds_pandasx256])
+birds_daskx256 = dd.multi.concat([birds_daskx128, birds_daskx128])
 
-birds_pandasx1024 = dd.multi.concat([birds_pandasx512, birds_pandasx512])
+birds_daskx512 = dd.multi.concat([birds_daskx256, birds_daskx256])
 
-birds_pandasx2048 = dd.multi.concat([birds_pandasx1024, birds_pandasx1024])
+birds_daskx1024 = dd.multi.concat([birds_daskx512, birds_daskx512])
 
-#birds_pandasx4096 = dd.multi.concat([birds_pandasx2048, birds_pandasx2048])
+birds_daskx2048 = dd.multi.concat([birds_daskx1024, birds_daskx1024])
 
-print(birds_pandasx2048.head)
+birds_daskx4096 = dd.multi.concat([birds_daskx2048, birds_daskx2048])
 
-# %%
+birds_daskx4096['distancex100'] = birds_daskx4096['distance']*100
 
-birds_pandasx2048['distancex100'] = birds_pandasx2048['distance']*100
+end_time = time.time()
 
-# %%
-
-#birds_daskx2048 = dd.from_pandas(birds_pandasx2048, npartitions=2048)
-
-birds_pandasx2048['distancex100'] = birds_pandasx2048['distance']*100
+print(f"It took {end_time-start_time} seconds")
 
 # %%
